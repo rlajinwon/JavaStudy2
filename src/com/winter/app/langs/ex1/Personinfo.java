@@ -1,5 +1,6 @@
 package com.winter.app.langs.ex1;
 
+import java.util.Scanner;
 import java.util.Set;
 
 public class Personinfo {
@@ -19,14 +20,27 @@ public class Personinfo {
 	//메서드명 init
 	//data 변수의 값을 파싱
 	
-	public void init() {
+	public Person[] init() {
 		
 		String [] datas = this.data.split(",");
+	
+		Person[] persons = new Person[datas.length/4]; 
 		
-		Person person = new Person();
-		person.setName(data);
+		int idx=0;
+		for(int i = 0; i< datas.length;i+=4) {
+			Person person = new Person();
+			
+			person.setName(datas[i]); //   0,  4 , 8
+			person.setPhone(datas[i+1]); //  1, 5 , 9
+			person.setEmail(datas[i+2]); //  2,  6 , 10
+			person.setBirth(datas[i+3]); //  3, 7 , 11
 		
+			persons[idx] = person;
+			idx++;
+
+			
 		
+		}return persons;
 		
 		//Person 객체에 데이터를 대입 
 		
@@ -35,5 +49,23 @@ public class Personinfo {
 
 		
 	}
+	
+	public Person find(Person[] persons) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("이름 입력: ");
+		String names = sc.next();
+		Person person = null;
+		for(int i = 0; i < persons.length; i++) {
+			person = persons[i];
+			break;
+		}
+		return person;
+	}
+	
+
+	
+	
+	
+	
 
 }

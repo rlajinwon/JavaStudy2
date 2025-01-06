@@ -11,9 +11,12 @@ public class StringMain {
 		//이름, 전화번호, 이메일, 생일
 		//아이유 , 010-1234-5678, iu@gmail.com, 1993-05-05
 		
-		Personinfo pi = new Personinfo();
+
+
+		PersonController pc = new PersonController();
 		
-		pi.init();
+		pc.start();
+		
 		
 	}
 }
