@@ -72,7 +72,7 @@ public class WeatherInfo {
 		Scanner sc = new Scanner(System.in);
 		String input = sc.next();
 		System.out.println("지역,기온,습도,날씨 입력:");
-		info.append(input);
+		
 		
 		
 		
