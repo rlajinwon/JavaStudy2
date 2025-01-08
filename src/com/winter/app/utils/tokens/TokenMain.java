@@ -13,17 +13,17 @@ public class TokenMain {
 		//분리한 문자열 하나 하나를 Token
 		
 		String data = "iu-170.2-59.3-서울";
-		StringTokenizer st = new StringTokenizer(data,"-"); 
+		StringTokenizer st = new StringTokenizer(data); 
 		int count = st.countTokens();
 		System.out.println(count);
 		
 		boolean check = st.hasMoreTokens();
 
 		while(st.hasMoreTokens()) {
-			String t =st.nextToken();
+			String t =st.nextToken("-");
 			System.out.println(t);
 			
-			t=st.nextToken();
+			t=st.nextToken("-");
 			System.out.println(t);
 		}
 	}
