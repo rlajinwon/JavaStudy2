@@ -1,5 +1,7 @@
 package com.winter.app.utils.collections.test;
 
-public class Marine {
+public class Marine extends GroundUnit {
+	
 
+	
 }

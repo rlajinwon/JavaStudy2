@@ -1,5 +1,7 @@
 package com.winter.app.utils.collections.test;
 
-public class Medic {
-
+public class Medic extends GroundUnit{
+	
+	
+	
 }

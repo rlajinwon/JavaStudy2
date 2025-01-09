@@ -1,5 +1,6 @@
 package com.winter.app.langs.ex2;
 import java.io.ObjectInputStream.GetField;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -20,12 +21,16 @@ public class WeatherInfo {
 		
 	}
 	
-	public WeatherDTO[] init() {
+	public ArrayList<WeatherDTO> init() {
 		
 		String data = this.info.toString().replace("*", ",");
 		StringTokenizer st = new StringTokenizer(data,",");
 		
-		WeatherDTO [] weatherDTOs = new WeatherDTO[st.countTokens()/4];
+//		WeatherDTO [] weatherDTOs = new WeatherDTO[st.countTokens()/4];
+		ArrayList<WeatherDTO> ar = new ArrayList<>();
+		
+		
+		
 		
 		//배열의 index번호
 		int idx = 0;
@@ -36,10 +41,11 @@ public class WeatherInfo {
 			weatherDTO.setGion(Integer.parseInt(st.nextToken().trim()));
 			weatherDTO.setHumidity(Double.parseDouble(st.nextToken().trim()));
 			weatherDTO.setStatus(st.nextToken().trim());
-			weatherDTOs[idx] = weatherDTO;
-			idx++;
+//			weatherDTOs[idx] = weatherDTO;
+			ar.add(weatherDTO);
+//			idx++;
 			
-		}return weatherDTOs;
+		}return ar;
 	}
 		
 	
@@ -78,15 +84,15 @@ public class WeatherInfo {
 		//weatherDTO에 담아서
 		//weatherDTO들을 리턴 
 	}
-	public WeatherDTO findByName(WeatherDTO[] dtos) {
+	public WeatherDTO findByName(ArrayList<WeatherDTO> ar) {
 		System.out.println("검색할 도시명을 입력하세요:");
 		
 		Scanner sc = new Scanner(System.in);
 		String name = sc.next();
 		
-		for(int i = 0; i<dtos.length;i++){
-			if(name.equals(dtos[i].getCity())) {
-				return dtos[i];
+		for(int i = 0; i<ar.size();i++){
+			if(name.equals(ar.get(i).getCity())) {
+				return ar.get(i);
 			}
 			
 		}
@@ -97,16 +103,41 @@ public class WeatherInfo {
 			return null;
 		}
 	
-	public void add() {
+	public void add(ArrayList<WeatherDTO>ar) {
 		Scanner sc = new Scanner(System.in);
 		String input = sc.next();
-		System.out.println("지역,기온,습도,날씨 입력:");
+		WeatherDTO weatherDTO = new WeatherDTO();
+		System.out.println("도시명 :");
 		
+		weatherDTO.setCity(sc.next());
 		
+		System.out.println("기온: ");
+		weatherDTO.setGion(sc.nextInt());
+		
+		System.out.println("습도: ");
+		weatherDTO.setHumidity(sc.nextDouble());
+		
+		System.out.println("상태: ");
+		weatherDTO.setStatus(sc.next());
+		
+		ar.add(weatherDTO);
 		
 		
 	}
 	
+	public void delete(ArrayList<WeatherDTO> ar) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("도시명 입력:");
+		String name = sc.next();
+		
+		for(int i = 0; i< ar.size();i++) {
+			if(name.equals(ar.get(i).getCity())) {
+				ar.remove(i);
+				break;
+			}
+			
+		}
+	}
 	
 	
 		

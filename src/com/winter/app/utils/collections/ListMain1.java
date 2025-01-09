@@ -7,7 +7,7 @@ public class ListMain1 {
 	public static void main(String[] args) {
 		ArrayList ar = new ArrayList();
 		
-		ar.add(1);
+		ar.add(1); // AutoBoxing
 		ar.add('2');
 		ar.add("Three");
 		ar.add(true);
@@ -28,6 +28,15 @@ public class ListMain1 {
 		
 		
 //		System.out.println(ar.get(0));
+		
+//		int a = ar.get(0);
+//		
+//		char b = ar.get(1);
+//		
+		
+		
+		
+		
 		//ArrayList
 	
 		for(int i=0; i<ar.size();i++) {
