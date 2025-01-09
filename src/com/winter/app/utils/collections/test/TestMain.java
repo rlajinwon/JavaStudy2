@@ -10,7 +10,7 @@ public class TestMain {
 		Marine marine = new Marine();
 		Marine marine2 = new Marine();
 		Medic medic = new Medic();
-		Wraith wraith = new Wraith();
+//		Wraith wraith = new Wraith();
 		
 		
 		// <? extends GroundUnit>     GroundUnit과 그 자손들만 가능
@@ -35,6 +35,8 @@ public class TestMain {
 		view.view(ar);
 		view.view2(ar2);
 		
+		
+
 		
 		
 		
