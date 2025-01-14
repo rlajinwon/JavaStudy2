@@ -26,31 +26,12 @@ public class FileOutput {
 			this.output(data);
 			}
 			
-			
-			
-			//		System.out.println("1 입력 2 종료");
-//		int input =sc.nextInt();
-//		if(input == 1) {
-//		String data = sc.next();
-//		this.output(data);
-//		
-//		}else if(input == 2) {
-//			System.out.println("종료합니다");
-//			break;
-//		}else {
-//			System.out.println("다시 입력해주세요");
-//		}
-//		
-		
 		
 		}
 		sc.close();
 		
 		
 	}
-	
-	
-	
 	
 	
 
