@@ -23,7 +23,29 @@ public class LocationDAO {
 		// 7. 연결 해제
 	
 	
+	public void getList() throws Exception{
+		Connection con = DBConnection.getConnection();
+		
+		String sql ="SELECT * FROM DEPARTMENTS ORDER BY 2 DESC";
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs = st.executeQuery();
+		while(rs.next()) {
+		
+			System.out.println(rs.getInt("LOCATION_ID"));
+		}
+		
+		DBConnection.disCoonnect(rs, st, con);
+		
+		
+		
+		
+	}
+	
+	
+	
 	public void getDetail() throws Exception {
+		
+		LocationDTO locationDTO = null;
 		
 		Connection connection = DBConnection.getConnection();
 		
@@ -34,15 +56,18 @@ public class LocationDAO {
 		ResultSet rs = st.executeQuery();
 		
 		if(rs.next()) {
-			System.out.println(rs.getString("CITY"));
+			locationDTO = new LocationDTO();
+			locationDTO.setLOCATION_ID(rs.getInt("LOCATION_ID"));
+			locationDTO.setSTREET_ADDRESS(rs.getString("STREET_ADDRESS"));
+			locationDTO.setPOSTAT_CODE(rs.getString("POSTAT_CODE"));
+			locationDTO.setCITY(rs.getString("CITY"));
+			locationDTO.setSTATE_PROVINCE(rs.getString("STATE_PROVINCE"));
+			locationDTO.setCOUNTRY_ID(rs.getString("COUNTRY_ID"));
 			
-		}else{
-			System.out.println("data X");
-			
+		
 			
 			
 		}
-
 		DBConnection.disCoonnect(rs, st, connection);
 
 		
