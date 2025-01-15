@@ -3,6 +3,8 @@ package com.winter.app.departments;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.winter.app.utils.DBConnection;
 
@@ -19,7 +21,7 @@ public class DepartmentDAO {
 	
 	// 4. 미리 보내기
 	
-	// 5. ? ? 
+	// 5. ? 세팅 
 	
 	// 6. 최종 전송 및 결과 처리
 	
@@ -27,7 +29,7 @@ public class DepartmentDAO {
 	
 	
 	
-	public void getList() throws Exception{
+	public List<DepartmentDTO> getList() throws Exception{
 
 
 		Connection con = DBConnection.getConnection();
@@ -35,12 +37,21 @@ public class DepartmentDAO {
 		PreparedStatement st = con.prepareStatement(sql);
 		ResultSet rs = st.executeQuery();
 		
+		List<DepartmentDTO> ar = new ArrayList<>();
+		
+		
 		while(rs.next()) {
-			System.out.println(rs.getString("DEPARTMENT_NAME"));
+			DepartmentDTO departmentDTO = new DepartmentDTO();
+			departmentDTO.setDepartment_id(rs.getInt("DEPARTMENT_ID"));
+			departmentDTO.setDepartment_name(rs.getString("DEPARTMENT_NAME"));
+			departmentDTO.setManager_id(rs.getInt("MANAGER_ID"));
+			departmentDTO.setLocation_id(rs.getInt("LOCATION_ID"));
+			ar.add(departmentDTO);
 		}
 		
 		DBConnection.disCoonnect(rs, st, con);
 		
+		return ar;
 		
 	}
 	
@@ -48,16 +59,20 @@ public class DepartmentDAO {
 	
 	
 	
-	public DepartmentDTO getDetail() throws Exception {
+	public DepartmentDTO getDetail(DepartmentDTO departmentDTO2) throws Exception {
 		
 		DepartmentDTO departmentDTO = null;
 		
 		
 		Connection connection = DBConnection.getConnection();
 		
-		String sql ="SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID = 10";
+		String sql ="SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID = ?";
 		
 		PreparedStatement st = connection.prepareStatement(sql);
+		
+		// ? 값을 세팅
+		st.setInt(1, departmentDTO2.getDepartment_id());
+		
 		
 		ResultSet rs = st.executeQuery();
 		

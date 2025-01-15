@@ -41,7 +41,7 @@ public class CountrieDAO {
 		ResultSet rs = st.executeQuery();
 		
 		if(rs.next()) {
-			System.out.println(rs.getString("COUNTRY"));
+			System.out.println(rs.getString("COUNTRY_ID"));
 			
 		}else{
 			System.out.println("data X");

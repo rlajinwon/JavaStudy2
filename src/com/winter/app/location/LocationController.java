@@ -1,18 +1,23 @@
 package com.winter.app.location;
 
+import java.util.List;
 import java.util.Scanner;
+
+import com.winter.app.departments.DepartmentDTO;
 
 public class LocationController {
 
 	private LocationDAO locationDAO;
 	private LocationDTO locationDTO;
 	private LocationView locationView;
+	private LocationService locationService;
 	
 	
 	public LocationController() {
 		locationDAO = new LocationDAO();
 		locationDTO = new LocationDTO();
 		locationView = new LocationView();
+		locationService = new LocationService();
 	}
 	
 	
@@ -28,7 +33,9 @@ public class LocationController {
 			
 			int select = sc. nextInt();
 			if(select ==1) {
-				locationDAO.getList();
+				List<LocationDTO> ar = locationService.getList();
+				locationView.view(ar);
+				
 			}else if(select ==2){
 				locationDAO.getDetail();
 				
