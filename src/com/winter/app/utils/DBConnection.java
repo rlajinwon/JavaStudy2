@@ -2,43 +2,29 @@ package com.winter.app.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 public class DBConnection {
+	
 
-	// DB에 접속 
-	
+	//Connection
 	public static Connection getConnection() throws Exception{
-		System.out.println("DB 접속");
-		String username = "hr";
-		String password = "hr";
-		String url = "jdbc:oracle:thin:@54.180.125.90:1521:xe";
-		String driver ="oracle.jdbc.driver.OracleDriver";
 		
-		
-		
-		//1. driver 를 메모리에 로딩(객체 생성)
-			Class.forName(driver);
-			
-			//2.DB에 연결
-			Connection connection = DriverManager.getConnection(url, username, password);
-			
-			
-			return connection;
-			
-		
-	}
-	public static void disCoonnect(ResultSet rs, PreparedStatement st, Connection con) throws Exception{
-		rs.close();
-		st.close();
-		con.close();
-		
-	}
-	public static void disConnnect(PreparedStatement st, Connection con) throws Exception{
-		st.close();
-		con.close();
-	}
+	//1.연결 정보
+
+	String user ="user01"; // 유저이름
+	String password = "user01";	//유저비밀번호
+	String url = "jdbc:oracle:thin:@15.164.164.21:1521:xe";		
+	String driver = "oracle.jdbc.driver.OracleDriver";		
 	
+	
+	//2. 드라이버 로딩
+	Class.forName(driver); //드라이버를 메모리에 로딩 (객체생성)
+	
+	//3. Connection 연결 후 리턴
+	
+	return DriverManager.getConnection(url,user,password);
+	
+	
+	}
 	
 }
