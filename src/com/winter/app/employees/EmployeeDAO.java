@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.winter.app.departments.DepartmentDTO;
 import com.winter.app.utils.DBConnection;
 
 public class EmployeeDAO {
 	
 	public Map<String, Object> getInfo() throws Exception{
 		// 부서별, 부서번호, 평균월급, 부서의 사원수 
-		Map<String, Object> map = new HashMap<>();
 		
 		Connection connection = DBConnection.getConnection();
 		
@@ -25,16 +25,20 @@ public class EmployeeDAO {
 		
 		ResultSet rs = st.executeQuery();
 		
-		rs.next();
+		List<Map<String,Object>> ar = new ArrayList<>();
 		
-		map.put("avg", rs.getDouble(1));
-		map.put("count",rs.getInt(2));
+		while(rs.next()) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("avg", rs.getDouble(1));
+			map.put("count",rs.getInt(2));
+			ar.add(map);
 		
+		}
 		DBConnection.disCoonnect(rs, st, connection);
 		
 		
+		return null;
 		
-		return map;
 	}
 	
 	
@@ -77,6 +81,34 @@ public class EmployeeDAO {
 		DBConnection.disCoonnect(rs, st, connection);
 		return ar;
 	}
+	
+	public void getInfo2() throws Exception{
+		Connection con = DBConnection.getConnection();
+		String sql = "SELECT E.EMPLOYEE_ID, E.SALARY, E.JOB_ID, D.DEPARTMENT_NAME , D.DEPARTMENT_ID "
+				+ "FROM EMPLOYEES E "
+				+ "	INNER JOIN "
+				+ "	DEPARTMENTS "
+				+ "	ON E.DEPARTMENT_ID = D.DEPARTMENT_ID "
+				+ "WHERE E.FIRST_NAME ='Lex'";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		ResultSet rs = st.executeQuery();
+		
+	
+		EmployeeDTO employeeDTO = null;
+		if(rs.next()) {
+			employeeDTO = new EmployeeDTO();
+			employeeDTO.setEmployee_id(rs.getInt("EMPLOYEE_ID"));
+			employeeDTO.setSalary(rs.getDouble("SALARY"));
+			employeeDTO.setJob_id(rs.getString("JOB_ID"));
+			employeeDTO.setDepartmentDTO(new DepartmentDTO());
+			employeeDTO.getDepartmentDTO().setDepartment_name("DEPARTMENT_NAME");
+			
+		}
+		
+		
+	}
+	
 	
 	
 }

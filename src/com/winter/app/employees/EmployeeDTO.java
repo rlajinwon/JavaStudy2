@@ -2,6 +2,8 @@ package com.winter.app.employees;
 
 import java.sql.Date;
 
+import com.winter.app.departments.DepartmentDTO;
+
 public class EmployeeDTO {
 
 	
@@ -16,6 +18,9 @@ public class EmployeeDTO {
 	private double commission_pct;
 	private int manager_id;
 	private int department_id;
+	
+	//1 : 1 관계
+	private DepartmentDTO departmentDTO;
 	
 	
 	
@@ -86,6 +91,12 @@ public class EmployeeDTO {
 	}
 	public void setDepartment_id(int department_id) {
 		this.department_id = department_id;
+	}
+	public DepartmentDTO getDepartmentDTO() {
+		return departmentDTO;
+	}
+	public void setDepartmentDTO(DepartmentDTO departmentDTO) {
+		this.departmentDTO = departmentDTO;
 	}
 	
 	

@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
+import com.winter.app.employees.EmployeeDTO;
 import com.winter.app.utils.DBConnection;
 
 public class DepartmentDAO {
@@ -93,6 +95,97 @@ public class DepartmentDAO {
 		
 		
 	}
+	
+	public DepartmentDTO getName() throws Exception{
+		Connection con = DBConnection.getConnection();
+		
+		String sql ="SELECT DEPARTMENT_NAME "
+				+ "FROM DEPARTMENTS "
+				+ "WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID "
+				+ "						FROM EMPLOYEES "
+				+ "						WHERE FIRST_NAME ='Lex')";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		ResultSet rs = st.executeQuery();
+		
+		
+		DepartmentDTO departmentDTO = null;
+		if(rs.next()) {
+			departmentDTO = new DepartmentDTO();
+			departmentDTO.setDepartment_name(rs.getString("DEPARTMENT_NAME"));
+			
+		}
+		DBConnection.disCoonnect(rs, st, con);
+		return departmentDTO;
+		
+	}
+	
+	//insert
+	
+	public int add(DepartmentDTO departmentDTO) throws Exception{
+		Connection con = DBConnection.getConnection();
+		String sql = "INSERT INTO DEPARTMENTS(DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) "
+				+ "VALUES(DEPARTMENTS_SEQ.NEXTVAL,?,?,?);" ;
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, departmentDTO.getDepartment_name());
+		st.setInt(2, departmentDTO.getManager_id());
+		st.setInt(3, departmentDTO.getLocation_id());
+		
+		// 최종 전송 (INSERT, UPDATE, DELETE) 
+		// 결과는 int , 메서드는 executeUpdate 
+		int result = st.executeUpdate(); 
+		
+		DBConnection.disConnnect(st, con);
+
+		
+		return result;
+		
+	}
+	
+	 public int Update(DepartmentDTO departmentDTO) throws Exception{
+		 //하나의 부서의 매너지번호 수정
+		 
+		 
+		 Connection con = DBConnection.getConnection();
+		 String sql = "UPDATE DEPARTMENTS "
+		 		+ "SET MANAGER_ID = ? "
+		 		+ "WHERE DEPARTMENT_ID = ? ";
+
+		 PreparedStatement st = con.prepareStatement(sql);
+		 
+		 st.setInt(1,departmentDTO.getManager_id());
+		 st.setInt(2, departmentDTO.getDepartment_id());
+		
+		 int result = st.executeUpdate();
+		 
+		 DBConnection.disConnnect(st, con);
+		 
+		 return result;
+		 
+	 }
+	 
+	 public int Delete(DepartmentDTO departmentDTO) throws Exception{
+		 
+		 Connection con = DBConnection.getConnection();
+		 String sql = "DELETE DEPARTMENTS "
+		 		+ "WHERE DEPARTMENT_ID = ? ";
+		 
+		 PreparedStatement st = con.prepareStatement(sql);
+		 st.setInt(1, departmentDTO.getDepartment_id());
+		 
+		 int result = st.executeUpdate();
+		 
+		 DBConnection.disConnnect(st, con);
+		 
+		 return result;
+		 
+		 
+		 
+	 }
+	
+	
 		
 	
 	

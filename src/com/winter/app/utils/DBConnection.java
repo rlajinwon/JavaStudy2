@@ -13,7 +13,7 @@ public class DBConnection {
 		System.out.println("DB 접속");
 		String username = "hr";
 		String password = "hr";
-		String url = "jdbc:oracle:thin:@15.164.49.118:1521:xe";
+		String url = "jdbc:oracle:thin:@54.180.125.90:1521:xe";
 		String driver ="oracle.jdbc.driver.OracleDriver";
 		
 		
@@ -34,6 +34,10 @@ public class DBConnection {
 		st.close();
 		con.close();
 		
+	}
+	public static void disConnnect(PreparedStatement st, Connection con) throws Exception{
+		st.close();
+		con.close();
 	}
 	
 	

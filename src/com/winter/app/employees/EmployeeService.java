@@ -40,7 +40,7 @@ public class EmployeeService {
 		while(iter.hasNext()) {
 			
             String key = iter.next();
-            String value = (String) map.get(key);
+            String value = (String)map.get(key);
             System.out.println(key + " : " + value);
 		
 		
