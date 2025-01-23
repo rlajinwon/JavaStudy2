@@ -3,14 +3,29 @@ package com.winter.app.ztest;
 public class TestMain {
 
 	public static void main(String[] args) {
+		
+		
 		try {
 		
-			DBConnectionTest test = new DBConnectionTest();
+			
+			
+//			UserDAOTest userDAOTest = new UserDAOTest();
+			
+//			userDAOTest.UserDAOJoinTest();
 		
-			test.getConnectionTest();
+//			userDAOTest.userDAOListTest();
 		
-		
-		
+	//		userDAOTest.DetailTest();
+			
+			
+			ProductDAOTest productDAOTest = new ProductDAOTest();
+			
+//			productDAOTest.getListTest();
+//			productDAOTest.getDetailTest();
+			
+			productDAOTest.rateTest();
+			
+			
 		
 		}catch (Exception e) {
 
@@ -19,6 +34,7 @@ public class TestMain {
 		}
 		
 	}
+	
 	
 	
 }

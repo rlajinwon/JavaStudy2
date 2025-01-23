@@ -2,6 +2,8 @@ package com.winter.app.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class DBConnection {
 	
@@ -26,5 +28,20 @@ public class DBConnection {
 	
 	
 	}
+	//close
+	public static void disConnect(PreparedStatement st, Connection con) throws Exception {
+		
+		st.close();
+		con.close();
+		
+	}
+	public static void disConnect(ResultSet rs, PreparedStatement st, Connection con) throws Exception {
+		
+		rs.close();
+		st.close();
+		con.close();
+		
+	}
+	
 	
 }
