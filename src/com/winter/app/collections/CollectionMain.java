@@ -6,6 +6,7 @@ public class CollectionMain {
 
 		StudyStack ss = new StudyStack();
 	
+		ss.add(999);
 		ss.add(1);
 		ss.info();
 		
